@@ -5,10 +5,14 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-moongoose.connect('mongodb://localhost:27017/ProStep', { useNewUrlParser: true, useUnifiedTopology: true });
+moongoose.connect('mmongodb+srv://prostep:prostep123>@prostep.6r93mlv.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(express.json());
 app.use(bodyParser.json());
+
+app.get('/', (req,res) => {
+    res.json('API server is running!');
+});
 
 app.post('/signup', async (req,res) => {
     const { name, email, password, phone, CNIC } = req.body;
@@ -65,7 +69,7 @@ app.post('/login', async (req,res) => {
 
 
 
-const PORT = process.env.PORT || 4000;
+const PORT = 4000;
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
